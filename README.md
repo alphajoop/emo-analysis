@@ -17,7 +17,7 @@ Si vous souhaitez contribuer à ce projet, suivez ces étapes :
 
 1. **Fork du Projet**: Faites un fork de ce projet en cliquant sur le bouton "Fork" en haut de cette page.
 
-2. **Clonage du Projet**: Clonez votre fork localement en utilisant la commande suivante dans votre terminal : git clone <https://github.com/votreutilisateur/emo-analysis.git>.
+2. **Clonage du Projet**: Clonez votre fork localement en utilisant la commande suivante dans votre terminal : git clone <https://github.com/alphajoop/emo-analysis.git>.
 
 3. **Installation des Dépendances**: Assurez-vous d'avoir Node.js installé. Exécutez `npm install` pour installer les dépendances nécessaires.
 
