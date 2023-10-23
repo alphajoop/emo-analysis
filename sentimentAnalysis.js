@@ -1,40 +1,43 @@
 /**
- * Fonction pour analyser le sentiment du texte.
+ * Fonction pour analyser le sentiment du texte en utilisant un lexique étendu.
  * @param {string} text - Le texte à analyser.
  * @returns {string} - Le résultat de l'analyse de sentiment.
  */
-export function analyzeSentiment(text) {
-  // Liste des mots considérés comme positifs et négatifs
-  const positiveWords = ['heureux', 'content', 'satisfait', 'positif'];
-  const negativeWords = ['triste', 'fâché', 'déçu', 'négatif'];
-
-  // Compter le nombre de mots positifs et négatifs
-  const wordCounts = new Map();
-  wordCounts.set('positive', 0);
-  wordCounts.set('negative', 0);
-
+export function analyzeSentiment(text, sentimentScores) {
   // Diviser le texte en mots et les convertir en minuscules pour la comparaison
   const words = text.toLowerCase().split(' ');
 
-  // Parcourir chaque mot et compter les occurrences de mots positifs et négatifs
+  let totalSentimentScore = 0;
+
   for (const word of words) {
-    if (positiveWords.includes(word)) {
-      wordCounts.set('positive', wordCounts.get('positive') + 1);
-    } else if (negativeWords.includes(word)) {
-      wordCounts.set('negative', wordCounts.get('negative') + 1);
+    if (sentimentScores.hasOwnProperty(word)) {
+      totalSentimentScore += sentimentScores[word];
     }
   }
 
-  // Récupérer le nombre de mots positifs et négatifs
-  const positiveCount = wordCounts.get('positive');
-  const negativeCount = wordCounts.get('negative');
-
-  // Déterminer le sentiment en fonction du nombre de mots positifs et négatifs
-  if (positiveCount > negativeCount) {
+  if (totalSentimentScore > 0) {
     return 'Sentiment positif';
-  } else if (negativeCount > positiveCount) {
+  } else if (totalSentimentScore < 0) {
     return 'Sentiment négatif';
   } else {
     return 'Sentiment neutre';
   }
 }
+
+// Lexique de mots et scores de sentiment
+const sentimentScores = {
+  heureux: 0.8,
+  content: 0.7,
+  satisfait: 0.6,
+  positif: 0.5,
+  triste: -0.8,
+  fâché: -0.7,
+  déçu: -0.6,
+  négatif: -0.5,
+};
+
+// Exemple d'utilisation
+const textToAnalyze =
+  "Je suis triste et déçu, mais j'espère que demain sera meilleur.";
+const result = analyzeSentiment(textToAnalyze, sentimentScores);
+console.log(result); // Résultat de l'analyse de sentiment
